@@ -13,12 +13,17 @@ class ArticleForm extends Form
     #[Validate('required')]
     public $content;
 
+    public $notification = 'none';
+    public $published = false;
+
     public $article;
 
     public function setArticle(Article $article)
     {
         $this->title = $article->title;
         $this->content = $article->content;
+        $this->published = $article->published;
+        $this->notification = $article->notification;
 
         $this->article = $article;
     }
@@ -27,13 +32,13 @@ class ArticleForm extends Form
     {
         $this->validate();
 
-        Article::create($this->only('title', 'content'));
+        Article::create($this->only('title', 'content','notification','published'));
     }
 
     public function update()
     {
         $this->validate();
 
-        $this->article->update($this->only('title', 'content'));
+        $this->article->update($this->only('title', 'content','notification','published'));
     }
 }

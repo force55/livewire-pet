@@ -12,6 +12,12 @@ class Article extends Model
 
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'published',
+        'notification',
+    ];
+
+    protected $casts = [
+        'published' => 'boolean',
     ];
 }
