@@ -29,10 +29,6 @@
                         </div>
                     </header>
 
-                    <main class="mt-6">
-                        <livewire:greeter />
-                    </main>
-
                 </div>
             </div>
         </div>
