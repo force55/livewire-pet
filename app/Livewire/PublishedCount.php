@@ -10,6 +10,7 @@ use Livewire\Component;
 class PublishedCount extends Component
 {
     public $count = 0;
+    public $placeholderText = '';
 
     public function mount()
     {
@@ -21,7 +22,7 @@ class PublishedCount extends Component
     public function placeholder()
     {
         return view('livewire.placeholder',[
-            'message' => 'Published count is loading...'
+            'message' => $this->placeholderText
         ]);
     }
     public function render()
