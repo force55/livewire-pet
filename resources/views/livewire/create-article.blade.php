@@ -87,8 +87,11 @@
         </div>
         <div class="mb-3">
             <button
-                class="text-gray-200 p-2 bg-indigo-700 hover:bg-indigo-900 rounded-sm"
+                class="text-gray-200 p-2 bg-blue-700 disabled:opacity-75 disabled:bg-blue-300  rounded-sm"
                 type="submit"
+                disabled
+                wire:dirty.attr.remove="disabled"
+                wire:dirty.class="hover:bg-blue-900"
             >
                 Save
             </button>
