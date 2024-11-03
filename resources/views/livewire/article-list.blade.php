@@ -1,6 +1,6 @@
 <div class="m-auto w-1/2 mb-4">
 
-    <div class="mb-3">
+    <div class="mb-3 flex justify-between items-center">
         <a
             wire:navigate
             href="{{ route('dashboard.articles.create') }}"
@@ -8,6 +8,7 @@
         >
             Create Article
         </a>
+        <livewire:published-count />
     </div>
 
 
