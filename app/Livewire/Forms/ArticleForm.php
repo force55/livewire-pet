@@ -9,6 +9,11 @@ use Livewire\Form;
 
 class ArticleForm extends Form
 {
+    public ?Article $article;
+
+    #[Locked]
+    public int $id;
+
     #[Validate('required')]
     public $title;
     #[Validate('required')]
@@ -18,10 +23,10 @@ class ArticleForm extends Form
     public $allowNotifications = false;
     public $published = false;
 
-    public ?Article $article;
+    public $photo_path = '';
+    #[Validate('image')]
+    public $photo;
 
-    #[Locked]
-    public int $id;
 
     public function setArticle(Article $article)
     {
@@ -30,6 +35,7 @@ class ArticleForm extends Form
         $this->content = $article->content;
         $this->published = $article->published;
         $this->notifications = $article->notifications ?? [];
+        $this->photo_path = $article->photo_path;
 
         $this->allowNotifications = count($this->notifications) > 0;
 
@@ -44,7 +50,11 @@ class ArticleForm extends Form
             $this->notifications = [];
         }
 
-        Article::create($this->only('title', 'content','notifications','published'));
+        if ($this->photo) {
+            $this->photo_path = $this->photo->storePublicly('article_photos',['disk' => 'public']);
+        }
+
+        Article::create($this->only('title', 'content','notifications','published','photo_path'));
         cache()->forget('published-count');
     }
 
@@ -56,7 +66,11 @@ class ArticleForm extends Form
             $this->notifications = [];
         }
 
-        $this->article->update($this->only('title', 'content','notifications','published'));
+        if ($this->photo) {
+            $this->photo_path = $this->photo->storePublicly('article_photos',['disk' => 'public']);
+        }
+
+        $this->article->update($this->only('title', 'content','notifications','published','photo_path'));
         cache()->forget('published-count');
     }
 }

@@ -5,10 +5,13 @@
     use App\Livewire\Forms\ArticleForm;
     use App\Models\Article;
     use Livewire\Attributes\Title;
+    use Livewire\WithFileUploads;
 
     #[Title('Edit Article')]
     class EditArticle extends AdminComponent
     {
+        use WithFileUploads;
+
         public ?Article $article;
 
         public ArticleForm $form;
