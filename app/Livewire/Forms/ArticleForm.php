@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Article;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -17,10 +18,14 @@ class ArticleForm extends Form
     public $allowNotifications = false;
     public $published = false;
 
-    public $article;
+    public ?Article $article;
+
+    #[Locked]
+    public int $id;
 
     public function setArticle(Article $article)
     {
+        $this->id = $article->id;
         $this->title = $article->title;
         $this->content = $article->content;
         $this->published = $article->published;
@@ -40,6 +45,7 @@ class ArticleForm extends Form
         }
 
         Article::create($this->only('title', 'content','notifications','published'));
+        cache()->forget('published-count');
     }
 
     public function update()
@@ -51,5 +57,6 @@ class ArticleForm extends Form
         }
 
         $this->article->update($this->only('title', 'content','notifications','published'));
+        cache()->forget('published-count');
     }
 }

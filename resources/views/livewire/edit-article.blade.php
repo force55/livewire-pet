@@ -1,5 +1,5 @@
 <div>
-    <h3 class="text-lg text-gray-200 mb-3">Edit Article</h3>
+    <h3 class="text-lg text-gray-200 mb-3">Edit Article (ID : {{ $form->id }})</h3>
     <form wire:submit="save">
         <div class="mb-3">
             <label wire:target="form.title" wire:dirty.class="text-orange-500" class="block" for="article-title">

@@ -10,17 +10,29 @@
         </a>
 
         <div>
-            <button class="text-gray-200 p-2 bg-blue-500 hover:bg-blue-600 rounded-sm"
-                    wire:click="showAll()"
+            <button @class([
+                        'text-gray-200 p-2 hover:bg-blue-900 rounded-sm',
+                        'bg-gray-700' => $showOnlyPublished,
+                        'bg-blue-700' => !$showOnlyPublished,
+
+                    ])
+                    wire:click="togglePublished(false)"
             >
                 Show All
             </button>
 
 
-             <button class="text-gray-200 p-2 bg-blue-500 hover:bg-blue-600 rounded-sm"
-                    wire:click="showPublished()"
-             >
-                Show published ( <livewire:published-count placeholder-text="Loading..."/> )
+            <button @class([
+                        'text-gray-200 p-2 hover:bg-blue-900 rounded-sm',
+                        'bg-blue-700' => $showOnlyPublished,
+                        'bg-gray-700' => !$showOnlyPublished,
+
+                    ])
+                    wire:click="togglePublished(true)"
+            >
+                Show published (
+                <livewire:published-count placeholder-text="Loading..."/>
+                )
             </button>
 
 
@@ -28,9 +40,14 @@
 
     </div>
 
+    @if(session('status'))
+        <div class="bg-green-700 text-white p-3 mb-3 text-center">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <div class="mt-3">
-        {{ $articles->links() }}
+        {{ $this->articles->links() }}
     </div>
 
 
@@ -42,7 +59,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($articles as $article)
+        @foreach($this->articles as $article)
             <tr class="border-b border-gray-700 bg-gray-800" wire:key="{{ $article->id }}">
                 <td class="px-6 py-3">{{ $article->title }}</td>
                 <td class="px-6 py-3">

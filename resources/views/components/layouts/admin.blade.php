@@ -869,7 +869,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('dashboard.articles') }}" class="block py-2 px-3 text-blue-500">Articles</a>
+                                <a href="{{ route('dashboard.articles.index') }}" class="block py-2 px-3 text-blue-500">Articles</a>
                             </li>
                         </ul>
                     </div>

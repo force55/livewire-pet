@@ -13,7 +13,7 @@ Route::get('/articles/{article}',ShowArticle::class)->name('show-article');
 
 
 Route::get('/dashboard',Dashboard::class)->name('dashboard');
-Route::get('/dashboard/articles',ArticleList::class)->name('dashboard.articles');
+Route::get('/dashboard/articles',ArticleList::class)->name('dashboard.articles.index');
 Route::get('/dashboard/articles/create',CreateArticle::class)->name('dashboard.articles.create');
 Route::get('/dashboard/articles/{article}/edit',EditArticle::class)->name('dashboard.articles.edit');
 //Route::get('/search',Search::class)->name('search');
