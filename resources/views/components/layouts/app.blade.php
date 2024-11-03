@@ -21,19 +21,46 @@
         <div class="relative w-full max-w-2xl lg:max-w-7xl">
             <nav class="bg-gray-900">
                 <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
-                    <div class="w-full block" id="navbar-default">
+                    <div class="w-full flex justify-between" id="navbar-default">
                         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
                             <li>
-                                <a wire:navigate href="{{ route('home') }}" class="block py-2 px-3 text-blue-500">Home</a>
+                                <a wire:navigate href="{{ route('home') }}"
+                                   class="block py-2 px-3 text-blue-500">Home</a>
                             </li>
-                            <li>
-                                <a wire:navigate href="{{ route('dashboard') }}" class="block py-2 px-3 text-blue-500">Admin
-                                    Dashboard</a>
-                            </li>
+                            @auth
+                                <li>
+                                    <a wire:navigate href="{{ route('dashboard') }}"
+                                       class="block py-2 px-3 text-blue-500">Admin
+                                        Dashboard</a>
+                                </li>
+                            @endauth
+
+                        </ul>
+
+                        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+                            @guest
+                                <li>
+                                    <a wire:navigate href="{{ route('login') }}"
+                                       class="block py-2 px-3 text-blue-500">Login</a>
+                                </li>
+                            @endguest
+
+                            @auth
+                                <li>
+                                    <a wire:navigate
+                                       href="{{ route('logout') }}"
+                                       class="block py-2 px-3 text-blue-500"
+                                    >
+                                        Logout
+                                    </a>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
 
-                    <livewire:search placeholder="whatever we want"/>
+                    <div class="w-1/2 ">
+                        <livewire:search placeholder="whatever we want"/>
+                    </div>
                 </div>
             </nav>
 
